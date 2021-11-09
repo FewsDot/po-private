@@ -12,13 +12,13 @@ const handlerHighestValue = async (req, res) => {
 		if (!collection) throw "please provide a collection name";
 		const cryptoPrices = await getCryptosPrices();
 		const now = nowInTimestamp();
-		const sixHoursInMs = 21600;
+		const twelveHoursInMs = 43200;
 		const cardsToUpdate = await getManyInDB(
 			collection,
 			{
 				$or: [
-					{ "market.dispenser.lastUpdate": { $gt: now - sixHoursInMs } },
-					{ "market.dex.lastUpdate": { $gt: now - sixHoursInMs } },
+					{ "market.dispenser.lastUpdate": { $gt: now - twelveHoursInMs } },
+					{ "market.dex.lastUpdate": { $gt: now - twelveHoursInMs } },
 				],
 			},
 			{ projection: { name: 1, market: 1, _id: 0 } }
