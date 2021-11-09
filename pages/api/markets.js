@@ -21,7 +21,7 @@ const handlerMarkets = async (req, res) => {
 		const BTCActualBlock = BTCData.data.height;
 		const requestMarketsOrders = requestBuilder("get_orders", {
 			filters: [
-				{ field: "block_index", op: ">=", value: BTCActualBlock - 30 },
+				{ field: "block_index", op: ">=", value: BTCActualBlock - 50 },
 				{ field: "status", op: "==", value: "filled" },
 			],
 			filterop: "AND",
@@ -43,7 +43,7 @@ const handlerMarkets = async (req, res) => {
 			return res.status(200).json({
 				action: "update Markets - Updated",
 				BTCActualBlock,
-				fromBlock: BTCActualBlock - 30,
+				fromBlock: BTCActualBlock - 50,
 				succes: true,
 				Collection: collection,
 				MarketsOrdersFound: marketOrdersFromAPI.length,
@@ -57,7 +57,7 @@ const handlerMarkets = async (req, res) => {
 		return res.status(200).json({
 			action: "update Markets - No Update !",
 			BTCActualBlock,
-			fromBlock: BTCActualBlock - 30,
+			fromBlock: BTCActualBlock - 50,
 			succes: true,
 			Collection: collection,
 			MarketsOrdersFound: marketOrdersFromAPI.length,

@@ -20,7 +20,7 @@ const handlerDispenses = async (req, res) => {
 		const BTCData = await getBTCBlockchainData();
 		const BTCActualBlock = BTCData.data.height;
 		const requestDispenses = requestBuilder("get_dispenses", {
-			filters: { field: "block_index", op: ">=", value: BTCActualBlock - 30 },
+			filters: { field: "block_index", op: ">=", value: BTCActualBlock - 50 },
 		});
 		const dispensesFromAPI = await fetchCounterparty(requestDispenses, "get_dispenses");
 		const dispensesOfCollection = filterResponseByTypeOfCards(
@@ -54,7 +54,7 @@ const handlerDispenses = async (req, res) => {
 			return res.status(200).json({
 				action: "update Dispenses",
 				BTCActualBlock,
-				fromBlock: BTCActualBlock - 30,
+				fromBlock: BTCActualBlock - 50,
 				succes: true,
 				DispensesFind: dispensesFromAPI.length,
 				Collection: collection,
@@ -67,7 +67,7 @@ const handlerDispenses = async (req, res) => {
 		return res.status(200).json({
 			action: "update Dispenses",
 			BTCActualBlock,
-			fromBlock: BTCActualBlock - 30,
+			fromBlock: BTCActualBlock - 50,
 			succes: true,
 			DispensesFound: dispensesFromAPI.length,
 			Collection: collection,
