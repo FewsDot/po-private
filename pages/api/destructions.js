@@ -26,6 +26,7 @@ const handlerDestructions = async (req, res) => {
 			NumberOfCard: collectionToFetch.length,
 			NumberOfCardToUpdate: destructedCardFiltred.length,
 			destructedCardFiltred,
+			bulkOfUpdate,
 			succes: true,
 		});
 	} catch (error) {
