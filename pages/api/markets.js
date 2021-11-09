@@ -40,7 +40,6 @@ const handlerMarkets = async (req, res) => {
 			const now = nowInTimestamp();
 			const bulkOfUpdateMarkets = getBulkOfUpdate(responseParsedByNameAndAsset, "markets", now);
 			await updateBulkInDB(collection, bulkOfUpdateMarkets);
-
 			return res.status(200).json({
 				action: "update Markets - Updated",
 				BTCActualBlock,
@@ -56,7 +55,7 @@ const handlerMarkets = async (req, res) => {
 			});
 		}
 		return res.status(200).json({
-			action: "update Dispenses - No Update !",
+			action: "update Markets - No Update !",
 			BTCActualBlock,
 			fromBlock: BTCActualBlock - 30,
 			succes: true,
