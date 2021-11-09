@@ -50,7 +50,7 @@ const handlerMarkets = async (req, res) => {
 				marketsOrdersOfCollection: marketsOrdersOfCollection.length,
 				CardsUpdated: responseParsedByNameAndAsset.filter((card) => card !== false).length,
 				ListOfCards: responseParsedByNameAndAsset.map(
-					(card) => card && card !== false && card.card
+					(card) => card && card !== false && card.name
 				),
 			});
 		}
