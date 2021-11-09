@@ -1,4 +1,4 @@
-import { checkAuthAndRequest } from "lib/backend/checkAuthAndRequest";
+import { checkAuthAndRequest } from "lib/checkAuthAndRequest";
 import { requestBuilder } from "lib/requestBuilder.js";
 import listOfRarepepe from "lib/listOfRarepepe.js";
 import listOfFakerare from "lib/listOfFakerare.js";

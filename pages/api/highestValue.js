@@ -1,4 +1,4 @@
-import { checkAuthAndRequest } from "lib/backend/checkAuthAndRequest";
+import { checkAuthAndRequest } from "lib/checkAuthAndRequest";
 
 const handler = async (req, res) => {
 	try {
