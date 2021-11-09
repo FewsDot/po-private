@@ -74,6 +74,7 @@ const handlerDispenses = async (req, res) => {
 			NumberOfDispensesCollectionFound: 0,
 		});
 	} catch (error) {
+		console.log(error);
 		return res.status(500).send({
 			error,
 		});
