@@ -3,7 +3,7 @@ import { getCryptosPrices } from "lib/fetcher.js";
 import { nowInTimestamp } from "lib/time.js";
 import { getManyInDB, updateBulkInDB } from "lib/handleDB.js";
 import { getMostRecentTxAndPrice } from "lib/formatData.js";
-import { getBulkOfUpdate } from "lib/getBulkOfUpdate.js";
+import { getBulkOfUpdate } from "lib/handleMongoRequest";
 
 const handlerHighestValue = async (req, res) => {
 	try {

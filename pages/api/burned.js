@@ -10,7 +10,7 @@ import {
 	filterResponseByTypeOfCards,
 	formatDivisibleNumberFromArray,
 } from "lib/formatData.js";
-import { getBulkOfUpdate } from "lib/getBulkOfUpdate.js";
+import { getBulkOfUpdate } from "lib/handleMongoRequest";
 import { getManyInDB, updateBulkInDB } from "lib/handleDB.js";
 
 const handlerBurned = async (req, res) => {

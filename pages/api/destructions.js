@@ -3,7 +3,7 @@ import listOfFakerare from "lib/listOfFakerare.js";
 import listOfRarepepe from "lib/listOfRarepepe.js";
 import { getAssetFromXchain } from "lib/fetcher.js";
 import { getArrayOfResultFromXChain } from "lib/formatData.js";
-import { getBulkOfUpdate } from "lib/getBulkOfUpdate.js";
+import { getBulkOfUpdate } from "lib/handleMongoRequest";
 import { updateBulkInDB } from "lib/handleDB.js";
 
 const handlerDestructions = async (req, res) => {

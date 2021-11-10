@@ -7,7 +7,7 @@ import {
 	buildMultiFiltersRequest,
 	formatDispenserLastSales,
 } from "lib/formatData.js";
-import { getBulkOfUpdate } from "lib/getBulkOfUpdate.js";
+import { getBulkOfUpdate } from "lib/handleMongoRequest";
 import { getBTCBlockchainData, fetchCounterparty } from "lib/fetcher.js";
 import { updateBulkInDB } from "lib/handleDB.js";
 import { nowInTimestamp } from "lib/time.js";
