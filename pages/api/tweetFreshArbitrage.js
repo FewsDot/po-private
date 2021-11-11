@@ -2,7 +2,7 @@ import { checkAuthAndRequest } from "lib/checkAuthAndRequest";
 import { getManyInDB } from "lib/handleDB";
 import { formatArbitragesData } from "lib/formatData";
 import { getLastArbitrages } from "lib/handleMongoRequest";
-import { getBTCBlockchainData, getCryptosPrices } from "lib/fetcher";
+import { getBTCBlockchainData, getBase64, getCryptosPrices } from "lib/fetcher";
 import { postTweet, getArbitrageTweet } from "lib/tweet";
 
 const handlerTweetRandomCard = async (req, res) => {
@@ -39,16 +39,26 @@ const handlerTweetRandomCard = async (req, res) => {
 			.concat(formattedFakerareArbitrage)
 			.filter((item) => item.name !== "PEPECASH");
 
-		if (arrayOfAllArbitrages.length > 0) {
-			arrayOfAllArbitrages.forEach(async (arbitrage) => {
-				console.log(getArbitrageTweet(arbitrage));
+		const base64 = await getBase64("https://rarepepewallet.com/images/cards/RUBBERPEPE.jpg");
+
+		console.log(base64);
+
+		{
+			/*
+				if (arrayOfAllArbitrages.length > 0) {
+			const arrayOfTweets = arrayOfAllArbitrages.map((arbitrage) => {
+				return getArbitrageTweet(arbitrage);
 			});
+
+			arrayOfTweets.forEach(async (tweet) =>
+				postTweet(tweet, "https://rarepepewallet.com/images/cards/RUBBERPEPE.jpg")
+			);
 
 			return res.status(200).json({
 				action: "Tweet  Fresh Arbitrage !",
 				NumberOfRarepepe: formattedRarepepeArbitrage.length,
 				NumberOfFakerare: formattedFakerareArbitrage.length,
-				arrayOfAllArbitrages,
+				arrayOfTweets,
 				succes: true,
 			});
 		} else {
@@ -56,6 +66,8 @@ const handlerTweetRandomCard = async (req, res) => {
 				action: "Tweet  Fresh Arbitrage - No Arbitrages found !",
 				succes: true,
 			});
+		}
+		*/
 		}
 	} catch (error) {
 		console.log(error);
