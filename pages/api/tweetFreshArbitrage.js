@@ -11,7 +11,7 @@ const handlerTweetRandomCard = async (req, res) => {
 		const BTCData = await getBTCBlockchainData();
 		const cryptoPrices = await getCryptosPrices();
 		const BTCActualBlock = BTCData.data.height;
-		const sixHoursInBTCBlocks = BTCActualBlock - 6666;
+		const sixHoursInBTCBlocks = BTCActualBlock - 244;
 		const lastArbitrages = getLastArbitrages(sixHoursInBTCBlocks);
 		const lastFreshArbitrageRarepepe = await getManyInDB(
 			"rarepepe",
@@ -35,7 +35,9 @@ const handlerTweetRandomCard = async (req, res) => {
 			"fakerare",
 			cryptoPrices.data
 		);
-		const arrayOfAllArbitrages = formattedRarepepeArbitrage.concat(formattedFakerareArbitrage);
+		const arrayOfAllArbitrages = formattedRarepepeArbitrage
+			.concat(formattedFakerareArbitrage)
+			.filter((item) => item.name !== "PEPECASH");
 
 		if (arrayOfAllArbitrages.length > 0) {
 			arrayOfAllArbitrages.forEach(async (arbitrage) => {
