@@ -3,7 +3,7 @@ import { getManyInDB } from "lib/handleDB";
 import { formatArbitragesData } from "lib/formatData";
 import { getLastArbitrages } from "lib/handleMongoRequest";
 import { getBTCBlockchainData, getCryptosPrices } from "lib/fetcher";
-import { postTweet, getDataTweet } from "lib/tweet";
+import { postTweet, getArbitrageTweet } from "lib/tweet";
 
 const handlerTweetRandomCard = async (req, res) => {
 	try {
@@ -11,7 +11,7 @@ const handlerTweetRandomCard = async (req, res) => {
 		const BTCData = await getBTCBlockchainData();
 		const cryptoPrices = await getCryptosPrices();
 		const BTCActualBlock = BTCData.data.height;
-		const sixHoursInBTCBlocks = BTCActualBlock - 66;
+		const sixHoursInBTCBlocks = BTCActualBlock - 6666;
 		const lastArbitrages = getLastArbitrages(sixHoursInBTCBlocks);
 		const lastFreshArbitrageRarepepe = await getManyInDB(
 			"rarepepe",
@@ -35,16 +35,26 @@ const handlerTweetRandomCard = async (req, res) => {
 			"fakerare",
 			cryptoPrices.data
 		);
-
 		const arrayOfAllArbitrages = formattedRarepepeArbitrage.concat(formattedFakerareArbitrage);
 
-		return res.status(200).json({
-			action: "Tweet  Fresh Arbitrage !",
-			NumberOfRarepepe: formattedRarepepeArbitrage.length,
-			NumberOfFakerare: formattedFakerareArbitrage.length,
-			arrayOfAllArbitrages,
-			succes: true,
-		});
+		if (arrayOfAllArbitrages.length > 0) {
+			arrayOfAllArbitrages.forEach(async (arbitrage) => {
+				console.log(getArbitrageTweet(arbitrage));
+			});
+
+			return res.status(200).json({
+				action: "Tweet  Fresh Arbitrage !",
+				NumberOfRarepepe: formattedRarepepeArbitrage.length,
+				NumberOfFakerare: formattedFakerareArbitrage.length,
+				arrayOfAllArbitrages,
+				succes: true,
+			});
+		} else {
+			return res.status(200).json({
+				action: "Tweet  Fresh Arbitrage - No Arbitrages found !",
+				succes: true,
+			});
+		}
 	} catch (error) {
 		console.log(error);
 		return res.status(500).send({

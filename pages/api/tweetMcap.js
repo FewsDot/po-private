@@ -1,7 +1,7 @@
 import { checkAuthAndRequest } from "lib/checkAuthAndRequest";
 import { getManyInDB } from "lib/handleDB";
 import { nowInTimestamp } from "lib/time";
-import { postTweet, getDataTweet } from "lib/tweet";
+import { postTweet, getDataMarketTweet } from "lib/tweet";
 
 const handlerTweetMcap = async (req, res) => {
 	try {
@@ -18,8 +18,8 @@ const handlerTweetMcap = async (req, res) => {
 			{ collection: "fakerare", timestamp: { $gt: now - tenMinutes } },
 			{}
 		);
-		const rarepepeDatasTweet = getDataTweet(mostRecentRarepepeData, "rarepepe");
-		const fakerareDatasTweet = getDataTweet(mostRecentFakerareData, "fakerare");
+		const rarepepeDatasTweet = getDataMarketTweet(mostRecentRarepepeData, "rarepepe");
+		const fakerareDatasTweet = getDataMarketTweet(mostRecentFakerareData, "fakerare");
 		const rarepepePost = await postTweet(rarepepeDatasTweet);
 		const fakerarePost = await postTweet(fakerareDatasTweet);
 
