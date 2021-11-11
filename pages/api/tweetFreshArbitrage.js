@@ -3,7 +3,7 @@ import { getManyInDB } from "lib/handleDB";
 import { formatArbitragesData } from "lib/formatData";
 import { getLastArbitrages } from "lib/handleMongoRequest";
 import { getBTCBlockchainData, getBase64, getCryptosPrices } from "lib/fetcher";
-import { postTweet, getArbitrageTweet } from "lib/tweet";
+import { postTweetWithImg, getArbitrageTweet } from "lib/tweet";
 
 const handlerTweetRandomCard = async (req, res) => {
 	try {
@@ -39,20 +39,15 @@ const handlerTweetRandomCard = async (req, res) => {
 			.concat(formattedFakerareArbitrage)
 			.filter((item) => item.name !== "PEPECASH");
 
-		const base64 = await getBase64("https://rarepepewallet.com/images/cards/RUBBERPEPE.jpg");
-
-		console.log(base64);
-
-		{
-			/*
-				if (arrayOfAllArbitrages.length > 0) {
+		if (arrayOfAllArbitrages.length > 0) {
 			const arrayOfTweets = arrayOfAllArbitrages.map((arbitrage) => {
 				return getArbitrageTweet(arbitrage);
 			});
 
-			arrayOfTweets.forEach(async (tweet) =>
-				postTweet(tweet, "https://rarepepewallet.com/images/cards/RUBBERPEPE.jpg")
-			);
+			arrayOfTweets.forEach(async (tweet) => {
+				const imgToBase64 = await getBase64(tweet.img_url);
+				return postTweetWithImg(imgToBase64, tweet.text);
+			});
 
 			return res.status(200).json({
 				action: "Tweet  Fresh Arbitrage !",
@@ -66,8 +61,6 @@ const handlerTweetRandomCard = async (req, res) => {
 				action: "Tweet  Fresh Arbitrage - No Arbitrages found !",
 				succes: true,
 			});
-		}
-		*/
 		}
 	} catch (error) {
 		console.log(error);
