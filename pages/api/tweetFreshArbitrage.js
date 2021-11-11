@@ -11,7 +11,7 @@ const handlerTweetRandomCard = async (req, res) => {
 		const BTCData = await getBTCBlockchainData();
 		const cryptoPrices = await getCryptosPrices();
 		const BTCActualBlock = BTCData.data.height;
-		const sixHoursInBTCBlocks = BTCActualBlock - 244;
+		const sixHoursInBTCBlocks = BTCActualBlock - 40;
 		const lastArbitrages = getLastArbitrages(sixHoursInBTCBlocks);
 		const lastFreshArbitrageRarepepe = await getManyInDB(
 			"rarepepe",
